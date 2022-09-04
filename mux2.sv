@@ -1,1 +1,1 @@
-/home/ivan/Dropbox/3° 2C Arquitectura del computador/Link to SingleCycleProcessor/mux2.sv
+../SingleCycleProcessor/mux2.sv
