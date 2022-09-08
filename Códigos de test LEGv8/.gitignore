@@ -1,0 +1,4 @@
+memory_map.txt
+*.o
+*.list
+*.elf

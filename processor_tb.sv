@@ -22,7 +22,7 @@ module processor_tb();
     begin
       CLOCK_50 = 0; reset = 1; dump = 0;
       #20ns reset = 0; 
-      #500ns dump = 1; 
+      #5000ns dump = 1; 
 	   #20ns $stop;
 	end 
 endmodule
