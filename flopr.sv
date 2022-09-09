@@ -1,1 +1,1 @@
-../SingleCycleProcessor/flopr.sv
+./SingleCycleProcessor/flopr.sv

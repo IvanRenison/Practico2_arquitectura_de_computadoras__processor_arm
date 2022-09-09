@@ -1,1 +1,1 @@
-../SingleCycleProcessor/signext.sv
+./SingleCycleProcessor/signext.sv

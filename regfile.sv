@@ -1,1 +1,1 @@
-../SingleCycleProcessor/regfile.sv
+./SingleCycleProcessor/regfile.sv

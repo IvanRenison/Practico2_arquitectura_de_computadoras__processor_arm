@@ -1,1 +1,1 @@
-../SingleCycleProcessor/fetch.sv
+./SingleCycleProcessor/fetch.sv

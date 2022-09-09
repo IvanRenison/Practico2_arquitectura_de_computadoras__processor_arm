@@ -1,1 +1,1 @@
-../SingleCycleProcessor/mux2.sv
+./SingleCycleProcessor/mux2.sv

@@ -1,1 +1,1 @@
-../SingleCycleProcessor/adder.sv
+./SingleCycleProcessor/adder.sv

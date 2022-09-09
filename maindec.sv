@@ -1,1 +1,1 @@
-../SingleCycleProcessor/maindec.sv
+./SingleCycleProcessor/maindec.sv

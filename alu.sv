@@ -1,1 +1,1 @@
-../SingleCycleProcessor/alu.sv
+./SingleCycleProcessor/alu.sv

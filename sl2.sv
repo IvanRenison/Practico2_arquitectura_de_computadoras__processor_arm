@@ -1,1 +1,1 @@
-../SingleCycleProcessor/sl2.sv
+./SingleCycleProcessor/sl2.sv

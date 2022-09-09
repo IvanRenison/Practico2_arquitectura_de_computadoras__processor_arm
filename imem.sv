@@ -1,1 +1,1 @@
-../SingleCycleProcessor/imem.sv
+./SingleCycleProcessor/imem.sv

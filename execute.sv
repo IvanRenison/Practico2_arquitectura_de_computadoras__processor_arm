@@ -1,1 +1,1 @@
-../SingleCycleProcessor/execute.sv
+./SingleCycleProcessor/execute.sv
