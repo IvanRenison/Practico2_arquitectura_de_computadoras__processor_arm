@@ -2,11 +2,13 @@ ARMGNU ?= aarch64-linux-gnu
 
 AOPS = --warn --fatal-warnings
 
-asm : main.list
+file = main
 
-all : asm
+all: rom
 
-clean :
+asm: $(file).list
+
+clean:
 	rm -f *.o
 	rm -f *.img
 	rm -f *.hex
@@ -14,11 +16,15 @@ clean :
 	rm -f *.elf
 	rm -f memory_map.txt
 
-main.o : main.s
-	$(ARMGNU)-as $(AOPS) main.s -o main.o
+$(file).o: $(file).s
+	$(ARMGNU)-as $(AOPS) $(file).s -o $(file).o
 
 
-main.list: memmap main.o 
-	$(ARMGNU)-ld main.o -T memmap -o main.elf -M > memory_map.txt
-	$(ARMGNU)-objdump -D main.elf > main.list
-	
+$(file).list: memmap $(file).o 
+	$(ARMGNU)-ld $(file).o -T memmap -o $(file).elf -M > memory_map.txt
+	$(ARMGNU)-objdump -D $(file).elf > $(file).list
+
+rom: asm
+	sh process.sh $(file) > $(file)_rom
+
+
