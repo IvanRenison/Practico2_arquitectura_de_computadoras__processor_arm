@@ -15,6 +15,7 @@ clean:
 	rm -f *.list
 	rm -f *.elf
 	rm -f memory_map.txt
+	rm -f *_rom
 
 $(file).o: $(file).s
 	$(ARMGNU)-as $(AOPS) $(file).s -o $(file).o
