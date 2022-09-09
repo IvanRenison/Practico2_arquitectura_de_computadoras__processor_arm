@@ -24,7 +24,7 @@ $(file).list: memmap $(file).o
 	$(ARMGNU)-ld $(file).o -T memmap -o $(file).elf -M > memory_map.txt
 	$(ARMGNU)-objdump -D $(file).elf > $(file).list
 
-rom: asm
+rom: asm process.sh
 	sh process.sh $(file) > $(file)_rom
 
 
