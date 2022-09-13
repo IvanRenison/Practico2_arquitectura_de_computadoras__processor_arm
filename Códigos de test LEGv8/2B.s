@@ -1,5 +1,5 @@
 // N = 29
-
+// Inizialización de la memoria
 	ADD x10, xzr, xzr // x10 = 0
 loop2: // while x0 != 30
 	SUB x11, x0, x30
@@ -10,7 +10,7 @@ loop2: // while x0 != 30
 	CBZ xzr, loop2
 end:
 
-
+// Ejercicio 2b
 // N = 29
 
 
