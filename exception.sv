@@ -8,12 +8,13 @@ module exception(
 		output logic [63:0] PCBranch, Exc_vector
 	);
 	
-	logic esync_out;
+	logic esync_out, EProc;
 	logic [63:0] ELR_out, ERR_out, MUX4_out, MUX2_out;
 	logic [3:0] ESR_out;
 	
+	assign EProc = esync_out & ~reset;
 	assign Exc_vector = 64'hd8;
-	assign ExcAsk = Exc_vector == imem_addr_F;
+	assign ExcAck = (imem_addr_F === Exc_vector) ? 1'b1 : 1'b0;
 	
 	ESync esync(
 		.Exc(Exc), .resetEsync(ExcAck), .reset(reset),
@@ -21,17 +22,17 @@ module exception(
 	);
 	
 	flopr_e #(64) ELR(
-		.clk(clk), .reset(reset), .enable(esync_out & ~reset), .d(imem_addr_F),
+		.clk(clk), .reset(reset), .enable(EProc), .d(imem_addr_F),
 		.q(ELR_out)
 	);
 
 	flopr_e #(64) ERR(
-		.clk(clk), .reset(reset), .enable(esync_out & ~reset), .d(NextPC_F),
+		.clk(clk), .reset(reset), .enable(EProc), .d(NextPC_F),
 		.q(ERR_out)
 	);
 	
 	flopr_e #(4) ESR(
-		.clk(clk), .reset(reset), .enable(esync_out & ~reset), .d(EStatus),
+		.clk(clk), .reset(reset), .enable(EProc), .d(EStatus),
 		.q(ESR_out)
 	);
 	
