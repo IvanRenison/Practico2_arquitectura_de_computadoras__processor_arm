@@ -7,5 +7,11 @@ module exception(
 		output logic [63:0] readData3_E,
 		output logic [63:0] PCBranch
 	);
+	
+	logic ESync_out;
+	logic [63:0] ELR_out, ERR_out, MUX4_out, MUX2_out;
+	logic [3:0] ESR_out;
+	
+	
 
 endmodule
