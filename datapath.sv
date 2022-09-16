@@ -2,31 +2,36 @@
 
 module datapath #(parameter N = 64) (
 		input logic reset, clk,
+		input logic Exc, ERet,
 		input logic reg2loc,
-		input logic AluSrc,
+		input logic [1:0] AluSrc,
 		input logic [3:0] AluControl,
 		input logic	Branch,
 		input logic memRead,
 		input logic memWrite,
 		input logic regWrite,	
 		input logic memtoReg,
+		input logic [3:0] EStatus,
 		input logic [31:0] IM_readData,
 		input logic [N-1:0] DM_readData,
 		output logic [N-1:0] IM_addr, DM_addr, DM_writeData,
-		output logic DM_writeEnable, DM_readEnable
+		output logic DM_writeEnable, DM_readEnable, ExcAck
 	);
 
-	logic PCSrc;
-	logic [N-1:0] PCBranch, writeData_E, writeData3; 
-	logic [N-1:0] signImm, readData1, readData2;
+	logic PCSrc, EProc_F;
+	logic [N-1:0] PCBranch, PCBranch_E, EVAddr_F, NextPC_F, writeData_E, writeData3;
+	logic [N-1:0] signImm, readData1, readData2, readData3_E;
 	logic zero;
 
 	fetch #(64) FETCH(
 		.PCSrc_F(PCSrc),
 		.clk(clk),
 		.reset(reset),
+		.EProc_F(EProc_F),
 		.PCBranch_F(PCBranch),
-		.imem_addr_F(IM_addr)
+		.EVAddr_F(EVAddr_F),
+		.imem_addr_F(IM_addr),
+		.NextPC_F(NextPC_F)
 	);
 
 	decode #(64) DECODE(
@@ -47,7 +52,8 @@ module datapath #(parameter N = 64) (
 		.signImm_E(signImm), 
 		.readData1_E(readData1), 
 		.readData2_E(readData2), 
-		.PCBranch_E(PCBranch), 
+		.readData3_E(readData3_E),
+		.PCBranch_E(PCBranch_E), 
 		.aluResult_E(DM_addr), 
 		.writeData_E(DM_writeData), 
 		.zero_E(zero)
@@ -64,6 +70,16 @@ module datapath #(parameter N = 64) (
 		.DM_readData_W(DM_readData), 
 		.memtoReg(memtoReg), 
 		.writeData3_W(writeData3)
+	);
+
+	exception EXCEPTION(
+		.reset(reset), .clk(clk), .Exc(Exc), .ERet(ERet),
+		.imem_addr_F(IM_addr), .NextPC_F(NextPC_F), .PCBranch_E(PCBranch_E),
+		.IM_readData(IM_readData),
+		.EStatus(EStatus),
+		.ExcAck(ExcAck),
+		.readData3_E(readData3_E),
+		.PCBranch(PCBranch), .Exc_vector(EVAddr_F)
 	);
 
 	// Salida de señales de control:

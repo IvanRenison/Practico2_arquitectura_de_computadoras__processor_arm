@@ -14,7 +14,7 @@ module exception(
 	
 	assign EProc = esync_out & ~reset;
 	assign Exc_vector = 64'hd8;
-	assign ExcAck = (imem_addr_F === Exc_vector) ? 1'b1 : 1'b0;
+	assign ExcAck = (imem_addr_F == Exc_vector) ? 1'b1 : 1'b0;
 	
 	ESync esync(
 		.Exc(Exc), .resetEsync(ExcAck), .reset(reset),
