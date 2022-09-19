@@ -28,7 +28,7 @@ module processor_tb();
 			CLOCK_50 = 0; reset = 1; dump = 0;
 			#20ns reset = 0;
 			#5000ns dump = 1;
-		 #20ns $stop;
-	end
+			#20ns $stop;
+		end
 endmodule
 
