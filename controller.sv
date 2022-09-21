@@ -4,7 +4,7 @@ module controller(
 		input logic [10:0] instr,
 		input logic reset, ExtIRQ, ExcAck,
 		output logic [3:0] AluControl, EStatus,
-		output logic reg2loc, regWrite, Branch, memtoReg, memRead, memWrite, Exc, ExtIAck, ERet,
+		output logic reg2loc, regWrite, Branch, memtoReg, memRead, memWrite, Exc, ExtlAck, ERet,
 		output logic [1:0] AluSrc
 	);
 
@@ -12,7 +12,7 @@ module controller(
 	logic NotAnInstr;
 
 	assign NotAnInstr = EStatus == 4'b0010;
-	assign ExtIAck = ExcAck & ExtIRQ;
+	assign ExtlAck = ExcAck & ExtIRQ;
 	assign Exc = ExtIRQ | NotAnInstr;
 
 	maindec decPpal(

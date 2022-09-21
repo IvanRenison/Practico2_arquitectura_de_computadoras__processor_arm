@@ -38,7 +38,7 @@ module exception(
 	
 	mux4 #(64) MUX4(
 		.d0(ERR_out), .d1(ELR_out), .d2({60'b0, ESR_out}), .d3(64'b0),
-		.s(IM_readData),
+		.s(IM_readData[13:12]),
 		.y(readData3_E)
 	);
 	

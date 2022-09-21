@@ -29,7 +29,8 @@ module processor_arm #(parameter N = 64) (
 		.memWrite(memWrite),
 		.EStatus(EStatus),
 		.Exc(Exc),
-		.ERet(ERet)
+		.ERet(ERet),
+		.ExtlAck(ExtlAck)
 	);
 
 	datapath #(64) dp(
